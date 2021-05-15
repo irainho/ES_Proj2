@@ -396,10 +396,15 @@ def update_errors_graph(value):
 
 def model_layout(figure, table):
     return [html.Center([dcc.Graph(figure=figure),
-            html.Table([html.Thead(html.Tr([html.Th('MAE'), html.Th('MSE'), html.Th('RMSE'), html.Th('cvRMSE')])),
-                        html.Tbody([html.Tr([html.Td(row) for row in error_values.iloc[table, 2:]])
+            html.Table([html.Caption('Error Values Obtained for the Model'),
+                        html.Thead(html.Tr([html.Th('MAE', className='th'),
+                                            html.Th('MSE', className='th'),
+                                            html.Th('RMSE', className='th'),
+                                            html.Th('cvRMSE', className='th')]),
+                                   className='th'),
+                        html.Tbody([html.Tr([html.Td(round(row, 2), className='td') for row in error_values.iloc[table, 2:]])
                                     ])
-                        ])])]
+                        ], className='table')])]
 
 
 @app.callback(Output('page_layout', 'children'),

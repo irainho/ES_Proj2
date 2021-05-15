@@ -136,3 +136,19 @@ color: white;
 .photo-div{
   margin: 30px;
 }
+
+.error-table{
+  color: #46555f;
+}
+
+.table, .th, .td {
+  color: #46555f;
+  border: 2px solid #46555f;
+  border-collapse: collapse;
+  margin: 8px;
+  text-align: center;
+}
+
+.th, .td{
+  padding: 10px;
+}
