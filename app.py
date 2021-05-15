@@ -265,17 +265,6 @@ about_the_author_layout = html.Table([
                                              ])
                                     ])
 ])
-
-
-
-                        #     [html.Td(html.Div(html.Img(src=app.get_asset_url('photo.jpeg'),
-                        #                                      className='photo'), className='photo-div'), rowSpan=3),
-                        #                     html.Td(html.H3('Inês Andrade Rainho'))]),
-                        #             html.Tr(html.Td(html.H4('IST Student Number: 90396'))),
-                        #             html.Tr(html.Td(html.H4('ines.rainho@tecnico.ulisboa.pt')))
-                        #             ])
-                        # ])
-
 # -- END
 
 
@@ -297,8 +286,8 @@ def toggle_dropdown(n_clicks):
 
 
 @app.callback(
-    dash.dependencies.Output('clean-data-graph', 'figure'),
-    [dash.dependencies.Input('radio', 'value')])
+    Output('clean-data-graph', 'figure'),
+    [Input('radio', 'value')])
 def update_graph_clean(value):
     if value == 'Energy Consumption':
         return graph_data(clean_data.Day, clean_data.Power_kW,
@@ -312,8 +301,8 @@ def update_graph_clean(value):
 
 
 @app.callback(
-    dash.dependencies.Output('raw-data-graph', 'figure'),
-    [dash.dependencies.Input('radio-raw-type', 'value')])
+    Output('raw-data-graph', 'figure'),
+    [Input('radio-raw-type', 'value')])
 def update_graph_raw(value):
     if value == 'Energy Consumption 2017':
         return graph_data(raw_data_2017.Date_start, raw_data_2017.Power_kW,
@@ -330,8 +319,8 @@ def update_graph_raw(value):
 
 
 @app.callback(
-    dash.dependencies.Output('show-exp-data-analysis', 'figure'),
-    [dash.dependencies.Input('radio-eda', 'value')])
+    Output('show-exp-data-analysis', 'figure'),
+    [Input('radio-eda', 'value')])
 def show_eda(value):
     if value == 'Power':
         return graph_eda(eda.Power_kW, "Visualization of Outliers in the Energy Consumption Data")
@@ -342,8 +331,8 @@ def show_eda(value):
 
 
 @app.callback(
-    dash.dependencies.Output('clustering-graph', 'figure'),
-    [dash.dependencies.Input('radio-clustering', 'value')])
+    Output('clustering-graph', 'figure'),
+    [Input('radio-clustering', 'value')])
 def update_graph_clustering(value):
     if value == 'Temperature':
         return graph_cluster("temp_C", "Clustering — Temperature (ºC) vs Power (kW)", "Temperature (ºC)")
@@ -358,8 +347,8 @@ def update_graph_clustering(value):
 
 
 @app.callback(
-    dash.dependencies.Output('show-feature-selection', 'figure'),
-    [dash.dependencies.Input('feature-selection', 'value')])
+    Output('show-feature-selection', 'figure'),
+    [Input('feature-selection', 'value')])
 def update_feature_selection(value):
     if value == 'kBest':
         return draw_histogram(feature_selection.features, feature_selection.kBest,
@@ -391,8 +380,8 @@ def content_regression(tab):
 
 
 @app.callback(
-    dash.dependencies.Output('compare-models', 'figure'),
-    [dash.dependencies.Input('radio-comp-models', 'value')])
+    Output('compare-models', 'figure'),
+    [Input('radio-comp-models', 'value')])
 def update_errors_graph(value):
     if value == 'MAE':
         return draw_histogram(error_values.models, error_values.mae, 'MAE for each model', 'Models', 'MAE')
@@ -412,8 +401,8 @@ def model_layout(figure, table):
                         ])])]
 
 
-@app.callback(dash.dependencies.Output('page_layout', 'children'),
-              [dash.dependencies.Input('url', 'pathname')])
+@app.callback(Output('page_layout', 'children'),
+              [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/exploratory_data_analysis':
         return exploratory_data_analysis_layout
